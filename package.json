@@ -1,0 +1,13 @@
+{
+  "name": "bkk-tourism-loader",
+  "version": "1.0.0",
+  "description": "โหลดข้อมูลสถานที่ท่องเที่ยวจาก Bangkok Open Data เข้า MySQL",
+  "main": "load_to_mysql.js",
+  "scripts": {
+    "load": "node load_to_mysql.js"
+  },
+  "dependencies": {
+    "csv-parse": "^5.5.6",
+    "mysql2": "^3.11.0"
+  }
+}
