@@ -1,27 +1,3 @@
-/**
- * โหลดข้อมูลสถานที่ท่องเที่ยวจาก CSV (ทุกเขตในโฟลเดอร์ data/) เข้า MySQL
- *
- * โครงสร้างโฟลเดอร์ที่ควรมี:
- *   APL-01/
- *     data/                              <- เก็บไฟล์ .csv ของแต่ละเขตไว้ที่นี่ (แยกจากโค้ด)
- *       attractions_samphanthawong.csv
- *       attractions_talingchan.csv
- *     load_to_mysql.js                   <- ไฟล์นี้
- *     package.json
- *
- * วิธีใช้:
- * 1. npm install
- * 2. สร้างฐานข้อมูลก่อน (รันใน mysql shell ครั้งเดียว):
- *    CREATE DATABASE bkk_tourism CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
- * 3. แก้ DB_CONFIG ด้านล่างให้ตรงกับเครื่องของคุณ (password)
- * 4. รัน: node load_to_mysql.js
- *    สคริปต์จะไล่โหลดทุกไฟล์ที่อยู่ใน DISTRICT_FILES ด้านล่างให้อัตโนมัติ
- *
- * จะเพิ่มเขตใหม่ทีหลัง แค่:
- *   - วางไฟล์ .csv ใหม่ในโฟลเดอร์ data/
- *   - เพิ่ม 1 บรรทัดใน DISTRICT_FILES ด้านล่าง (ชื่อไฟล์ -> ชื่อเขต)
- *   - รัน node load_to_mysql.js ใหม่ (รันซ้ำได้ ไม่ error ไม่เกิดข้อมูลซ้ำ)
- */
 
 const fs = require("fs");
 const path = require("path");
@@ -57,7 +33,7 @@ const DISTRICT_FILES = {
   "attractions_bang_sue.csv": "บางซื่อ",
   "attractions_bang_na.csv": "บางนา",
   "attractions_bang_bon.csv": "บางบอน",
-  "attractions_bang_na.csv": "บึ่งกุ่ม",
+  "attractions_bueng_kum.csv": "บึ่งกุ่ม",
 
 
 
@@ -103,7 +79,7 @@ CREATE TABLE IF NOT EXISTS attractions (
     address TEXT,
     phone VARCHAR(255),
     googlemap_url VARCHAR(500),
-    hours_text VARCHAR(255) DEFAULT NULL,   -- เติมเองภายหลัง (BKK ไม่มีข้อมูลนี้)
+    hours_text VARCHAR(255) DEFAULT NULL,   -- เติมเองภายหลัง (BKK ไม่มีข้อมูลนี้) //เติมแล้ว
     photo_url VARCHAR(500) DEFAULT NULL,    -- เติมเองภายหลัง (BKK ไม่มีข้อมูลนี้)
     UNIQUE KEY uniq_source_district (source_id, district)
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
