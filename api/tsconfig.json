@@ -5,12 +5,11 @@
     "lib": ["ES2021"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true,
     "strict": false,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "moduleResolution": "node"
-  }
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist"
+  },
+  "include": ["src/**/*.ts"]
 }

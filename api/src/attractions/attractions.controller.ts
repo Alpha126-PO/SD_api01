@@ -1,26 +1,23 @@
-import { Controller, Get, Query } from "@nestjs/common";
-import { AttractionsService } from "./attractions.service";
+import { Controller, Get, Query } from '@nestjs/common';
+import { AttractionsService } from './attractions.service';
+import { AttractionsQueryDto } from './attractions.dto';
 
-@Controller("attractions")
+@Controller('attractions')
 export class AttractionsController {
-  constructor(private readonly attractionsService: AttractionsService) {}
+  constructor(private readonly service: AttractionsService) {}
 
   /**
-   * GET /attractions?district=ตลิ่งชัน&category=วัด&openNow=true
-   * ตรงกับ "เลือกเขต + หมวดหมู่ + toggle เปิดอยู่ตอนนี้" ในหน้าแอป
+   * GET /attractions?district=บางรัก&category=วัด&openNow=false
+   * ตรงกับ contract ที่ทีมตกลงกันไว้ใน bruno/projectApi/Attractions code 200.yml
    */
   @Get()
-  findAll(
-    @Query("district") district?: string,
-    @Query("category") category?: string,
-    @Query("openNow") openNow?: string
-  ) {
-    return this.attractionsService.findAll(district, category, openNow === "true");
+  async getAttractions(@Query() query: AttractionsQueryDto) {
+    return this.service.find(query);
   }
 
   /** GET /attractions/districts -> รายชื่อเขตทั้งหมดที่มีข้อมูล ใช้ทำ dropdown เลือกเขต */
-  @Get("districts")
-  listDistricts() {
-    return this.attractionsService.listDistricts();
+  @Get('districts')
+  async getDistricts() {
+    return this.service.listDistricts();
   }
 }

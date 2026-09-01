@@ -5,7 +5,7 @@ import { AppModule } from "./app.module";
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors(); // ให้หน้าเว็บ/แอปฝั่ง frontend เรียกมาได้
-  await app.listen(3000);
-  console.log("API รันอยู่ที่ http://localhost:3000/attractions");
+  await app.listen(process.env.PORT ?? 3000);
+  console.log(`API รันอยู่ที่ http://localhost:${process.env.PORT ?? 3000}/attractions`);
 }
 bootstrap();
